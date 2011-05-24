@@ -8,15 +8,13 @@
 <![endif] - - >
 <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
 <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
-<!--[if lt IE< 8%]>= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
+<!--[if lt IE< 8%]> <%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
 <%= stylesheet_link_tag 'custom', :media => 'screen' %>
 </head>
 <body>
 <div class="container">
 <header>
-<%= image_tag("logo.png", :alt => "Sample App", :class => "round") %>
-http://ruby.railstutorial.org/book/ruby-on-rails-tutorial (151 of 500) [5/16/11 2:54:54 PM]
-Ruby on Rails Tutorial: Learn Rails by Example | Ruby on Rails 3 Tutorial book and screencasts | by Michael Hartl
+<%= image_tag("logo.png", :alt => "Sample App", :class => "round kara") %>
 <nav class="round">
 <ul>
 <li><%= link_to "Home", '#' %></li>
@@ -25,6 +23,7 @@ Ruby on Rails Tutorial: Learn Rails by Example | Ruby on Rails 3 Tutorial book a
 </ul>
 </nav>
 </header>
+<br style="clear:both;"/>
 <section class="round">
 <%= yield %>
 </section>
