@@ -1,0 +1,109 @@
+html {
+/* http://richard.milewski.org/archives/1014 */
+   min-height: 100%;
+}
+.kara { 
+    padding: 10px;
+    margin-right: 16px;
+    float: left;
+    height: 200px;
+}
+
+.round, .signup_button_round {
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+.container {
+width: 710px;
+}
+body {
+    background: #9AD1DA;
+
+    background: #ebf1f6; /* Old browsers */
+    background: -moz-linear-gradient(top, #ebf1f6 0%, #abd3ee 13%, #89c3eb 33%, #d5ebfb 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(13%,#abd3ee), color-stop(33%,#89c3eb), color-stop(100%,#d5ebfb)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ebf1f6 0%,#abd3ee 43%,#89c3eb 53%,#d5ebfb 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ebf1f6 0%,#abd3ee 43%,#89c3eb 53%,#d5ebfb 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #ebf1f6 0%,#abd3ee 43%,#89c3eb 53%,#d5ebfb 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #ebf1f6 0%,#abd3ee 43%,#89c3eb 53%,#d5ebfb 100%); /* W3C */
+}
+
+header {
+padding-top: 20px;
+}
+header img {
+padding: 1em;
+background: #fff;
+}
+section {
+margin-top: 1em;
+font-size: 120%;
+padding: 20px;
+}
+section h1 {
+font-size: 200%;
+}
+/* Links */
+a {
+color: #09c;
+text-decoration: none;
+}
+a:hover {
+color: #069;
+text-decoration: underline;
+}
+a:visited {
+color: #069;
+}
+v {
+float: right;
+}
+/* Navigation */
+nav {
+float: right;
+}
+nav {
+background-color: white;
+padding: 0 0.7em;
+white-space: nowrap;
+}
+nav ul {
+margin: 0;
+padding: 0;
+}
+nav ul li {
+list-style-type: none;
+display: inline-block;
+padding: 0.2em 0;
+}
+nav ul li a {
+padding: 0 5px;
+font-weight: bold;
+}
+nav ul li a:visited {
+color: #09c;
+}
+nav ul li a:hover {
+text-decoration: underline;
+}
+a.signup_button_round {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    width: 190px;
+    color: #fff;
+    background: #006400;
+    font-size: 150%;
+    font-weight: bold;
+    padding: 20px;
+background: #d0e4f7; /* Old browsers */
+background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(24%,#73b1e7), color-stop(50%,#0a77d5), color-stop(79%,#539fe1), color-stop(100%,#87bcea)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* IE10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 ); /* IE6-9 */
+background: linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* W3C */
+}
