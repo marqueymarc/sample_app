@@ -17,7 +17,7 @@ html {
 
 .karaReflect {
 -webkit-box-reflect: below 2px
--webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.6, transparent), to(white));
+-webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.75, transparent), to(white));
 }
 .round, .signup_button_round {
     border-radius: 10px;
