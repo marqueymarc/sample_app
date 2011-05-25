@@ -1,11 +1,11 @@
 module ApplicationHelper
 
   def title
-    base_title = "Sample Application"
+    base_title = "Kara Application"
     if @title.nil? 
 	base_title
     else
-	"{base_title} | #{@title}"
+	"#{base_title} | #{@title}"
     end
   end
 end
