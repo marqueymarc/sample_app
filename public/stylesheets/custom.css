@@ -1,6 +1,12 @@
+@font-face {
+    font-family: "Prime Minister of Canada";
+    src: url("http://princexml.com/fonts/larabie/primemin.ttf") format("truetype");
+}
+
 html {
 /* http://richard.milewski.org/archives/1014 */
    min-height: 100%;
+   font-family: "Prime Minister of Canada", sans-serif;
 }
 .kara { 
     padding: 10px;
@@ -9,12 +15,16 @@ html {
     height: 200px;
 }
 
+.karaReflect {
+-webkit-box-reflect: below 2px
+-webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.6, transparent), to(white));
+}
 .round, .signup_button_round {
     border-radius: 10px;
     -moz-border-radius: 10px;
 }
 .container {
-width: 710px;
+width: 100%;
 }
 body {
     background: #9AD1DA;
@@ -67,6 +77,7 @@ nav {
 background-color: white;
 padding: 0 0.7em;
 white-space: nowrap;
+margin-right:40px;
 }
 nav ul {
 margin: 0;
