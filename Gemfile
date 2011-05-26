@@ -32,6 +32,7 @@ group :development do
     gem 'autotest-rails'
     gem 'autotest-growl'
     gem 'autotest-fsevent'
+    gem 'annotate-models', '1.0.4'
 end
 group :test do
    gem 'webrat', '0.7.1'
