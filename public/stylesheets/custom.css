@@ -26,6 +26,22 @@ html {
 .container {
 width: 100%;
 }
+user {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid purple;
+    display: block;
+    padding:	2px;
+    text-align: center;
+}
+name {
+}
+email {
+    font-family:    serif;
+    font-weight:    lighter;
+    text-align:	    right;
+}
 body {
     background: #9AD1DA;
 

@@ -16,5 +16,6 @@ class User < ActiveRecord::Base
   [:name, :email].each do | sym |
     validates sym, :presence => true, :length => {:maximum => 50 }
   end
-  validates :email, :format => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, :format => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
+    :uniqueness=> {:case_sensitive => false}
 end

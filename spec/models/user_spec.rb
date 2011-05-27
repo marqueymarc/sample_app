@@ -26,4 +26,9 @@ describe User do
 	    b_m.should_not be_valid
 	end
     end
+    it "should reject duplicate emails" do
+	User.create!(@attr)
+	b_m = User.new(@attr.merge(:email => @attr[:email].upcase))
+	b_m.should_not be_valid
+    end
 end
