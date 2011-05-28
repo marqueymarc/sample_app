@@ -10,9 +10,11 @@
 #  updated_at :datetime
 #
 
+require 'Digest'
+
 class User < ActiveRecord::Base
-    attr_accessor :password
-    attr_accessible :name, :email, :password, :password_confirmation
+    attr_accessor   :password
+    attr_accessible :name, :email, :password
 
     [:name, :email].each do | sym |
 	validates sym, :presence => true, :length => {:maximum => 50 }
@@ -25,11 +27,30 @@ class User < ActiveRecord::Base
 	:length => { :within => 6..40, :too_long => "password too long",
 	    :too_short => "password must be > 6 characters"}
     before_save :encrypt_password
+    # get a user if authorized
+    def self.authorize(email, password)
+	if (u = User.find_by_email(email)) then
+	    u = nil if !u.has_password?(password) 
+	end
+	u
+    end
+    def has_password?(given_password)
+	encrypt(given_password) == self.encrypted_password
+    end
     private 
 	def encrypt_password
+	    if (!self.salt)
+		# in case encrypt_password :save is called somewhere else magical
+		s = "#{Time.now.to_f}"
+		self.salt = secure_hash(s)
+	    end
+
 	    self.encrypted_password = encrypt(password)
 	end
 	def encrypt(s)
-	    s # for now
+	    secure_hash("#{s}&&#{self.salt}")
+	end
+	def secure_hash(s)
+	    Digest::SHA2.hexdigest("#{s}")
 	end
 end

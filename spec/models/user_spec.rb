@@ -7,13 +7,15 @@ describe User do
     end
 
     before(:each) do
-	@attr = {:name => "Example A. User", :email => "ex@user.com",
-	    :password => "lemmein", :password_confirm => "lemmein"}
+	@attr = {:name => @name = "exampleuser", 
+	   :email => @email = "ex@user.com",
+	   :password => @password = "lemmein", :password_confirm => @password}
 	@bad_mails = %w[marc@marc, marc_at_marc.com, marc@marc.]
+	@user = User.create!(@attr)
     end
     
     it "should create a new instance given a valid attribute" do
-	u = User.create!(@attr)
+	u = User.create!(@attr.merge(:email=>"next@next.com", :name=>"another"))
     end
     [:name, :email].each do | sym |
       it "should require a #{sym}" do
@@ -33,7 +35,6 @@ describe User do
 	end
     end
     it "should reject duplicate emails" do
-	User.create!(@attr)
 	b_m = User.new(@attr.merge(:email => @attr[:email].upcase))
 	b_m.should_not be_valid
     end
@@ -48,12 +49,29 @@ describe User do
 	    end
 	end
 	it "should have an encrypted_password attribute" do
-	    u = User.create(@attr)
-	    u.should respond_to(:encrypted_password)
+	    @user.should respond_to(:encrypted_password)
 	end
 	it "should set the encrypted password" do
-	    u = User.create(@attr)
-	    u.encrypted_password.should_not be_blank
+	    @user.encrypted_password.should_not be_blank
+	end
+	it "should match matching encrypted_passwords" do
+	    @user.has_password?(@user.password).should be_true
+	end
+	it "should not match differing encrypted_passwords" do
+	    @user.has_password?("other").should be_false
+	end
+	it "should not match two users with the same password" do
+	    u = User.create!(@attr.merge(:email=> "second@email.com"))
+	    @user.encrypted_password.should_not == u.encrypted_password
+	end
+	it "should find an authorized user with a correct password" do
+	    User.authorize(@email, @password).should == @user
+	end
+	it "should not find an user with an incorrect password" do
+	    User.authorize(@email, @password + "a").should be_nil
+	end
+	it "should not find a non-existant user" do
+	    User.authorize(@email+"A", @password).should be_nil
 	end
     end
 end
