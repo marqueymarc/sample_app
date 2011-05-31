@@ -26,21 +26,37 @@ html {
 .container {
 width: 100%;
 }
-user {
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 3px solid purple;
-    display: block;
-    padding:	2px;
-    text-align: center;
+.profile {
+    position:	    relative;
+    top:	    -150px;
+    margin-left:    auto;
+    margin-right:   auto;
+    background:	    white;
 }
 name {
+    margin-left:    4px;
+    font-size:	    14pt;
+    padding-left:   4px;
+    padding-right:  20px;
+}
+.sidebar {
+    font-family:    sans-serif;
+    font-size:	    75%;
+    float:	    right;
+    margin:	    4px;
+    padding:	    4px;
+    background:	    PaleGoldenRod;
 }
 email {
-    font-family:    serif;
+    font-size:	    66%;
     font-weight:    lighter;
     text-align:	    right;
+}
+.gravatar {
+    padding:	1px;
+    border:	1pt solid black;
+    vertical-align: middle;
+    margin:	4px 4px 4px 0px;
 }
 body {
     background: #9AD1DA;

@@ -1,4 +1,16 @@
 
-<user>
-<name><%= @user.name %></name> <email><%= @user.email %></email>
-</user>
+<table class="profile round">
+    <tr>
+    <td>
+    <name>
+	<%=gravatar_for(@user)%>
+	<%= @user.name %>
+    </name>
+    </td>
+    <td class="sidebar round">
+    <strong>Name</strong> <%=@user.name%><br/>
+    <strong>Email </strong><%=mail_to @user.email%><br/>
+    <strong>URL </strong><%=link_to user_path %>
+    </td>
+    </tr>
+</table>
