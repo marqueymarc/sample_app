@@ -44,13 +44,14 @@ name {
     font-size:	    75%;
     float:	    right;
     margin:	    4px;
-    padding:	    4px;
+    padding:	    4px 10px;
     background:	    PaleGoldenRod;
 }
-email {
-    font-size:	    66%;
-    font-weight:    lighter;
-    text-align:	    right;
+.sidebar strong  {
+    display:	    inline-block;
+    color:	    DarkSlateBlue;
+    min-width:	    4em;
+    padding-right:  6px;
 }
 .gravatar {
     padding:	1px;
