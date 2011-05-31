@@ -1,20 +1,23 @@
-require 'spec_helper'
-
+require 'spec_helper' 
 describe User do
 
     def pp(s) 
-	{:password => s, :password_confirm => s}
+	{:password => s, :password_confirmation => s}
     end
 
     before(:each) do
 	@attr = {:name => @name = "exampleuser", 
 	   :email => @email = "ex@user.com",
-	   :password => @password = "lemmein", :password_confirm => @password}
+	   :password => @password = "lemmein", 
+	   :password_confirmation => @password}
 	@bad_mails = %w[marc@marc, marc_at_marc.com, marc@marc.]
 	@user = User.create!(@attr)
     end
     
     it "should create a new instance given a valid attribute" do
+	u = User.create!(@attr.merge(:email=>"next@next.com", :name=>"another"))
+    end
+    it "should create fail if password and confirmation don't match" do
 	u = User.create!(@attr.merge(:email=>"next@next.com", :name=>"another"))
     end
     [:name, :email].each do | sym |
@@ -41,7 +44,7 @@ describe User do
     describe "Password validations" do
 	[ ["should have a password", ""] ,
 	  ["should fail with a password which is too short" , "aaaa"],
-	  ["should fail with a password which is too short", "a"*41]
+	  ["should fail with a password which is too long", "a"*41]
 	].each do | pair |
 	    it pair[0] do
 		b_m = User.new(@attr.merge(pp pair[1]))

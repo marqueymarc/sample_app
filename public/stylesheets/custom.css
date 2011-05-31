@@ -19,14 +19,19 @@ html {
 -webkit-box-reflect: below 2px
 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.75, transparent), to(white));
 }
-.round, .signup_button_round {
+.round, .signup_button_round, .new_user{
     border-radius: 10px;
     -moz-border-radius: 10px;
 }
 .container {
 width: 100%;
 }
-.profile {
+.new_user {
+    width:	    400px;
+    padding:	    4px;
+}
+
+.profile , .new_user {
     position:	    relative;
     top:	    -150px;
     margin-left:    auto;
@@ -58,6 +63,45 @@ name {
     border:	1pt solid black;
     vertical-align: middle;
     margin:	4px 4px 4px 0px;
+}
+
+/* error messages */
+.field_with_errors {
+    margin-top: 10px;
+    padding: 2px;
+    background-color: red;
+    display
+    display: table;
+}
+.field_with_errors label {
+    color: #fff;
+}
+#error_explanation {
+    width: 380;
+    border: 2px solid red;
+    padding: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    font-family:	sans-serif;
+}
+#error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    background-color: #c00;
+    color: #fff;
+}
+#error_explanation p {
+    color: #333;
+    margin-bottom: 0;
+    padding: 5px;
+}
+#error_explanation ul li {
+    font-size: 12px;
+    list-style: round;
 }
 body {
     background: #9AD1DA;

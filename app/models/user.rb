@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 	:allow_blank => false,
 	:length => { :within => 6..40, :too_long => "password too long",
 	    :too_short => "password must be > 6 characters"}
-    #validates :password_confirmation, :presence=>true, 
+    #validates :password_confirmation, :presence=>true
     before_save :encrypt_password
     # get a user if authorized
     def self.authorize(email, password)

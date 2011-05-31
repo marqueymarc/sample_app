@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def new
-    @title = "Sign Up"
+    new_title
+    @user = User.new
   end
 
   def show
@@ -8,6 +9,21 @@ class UsersController < ApplicationController
     if (@user = User.find(params[:id])) then
 	@title = @user.name
     end
+  end
+
+  def create
+    @user = User.new(params[:user])
+
+    if @user.save 
+	redirect_to @user
+    else
+	new_title
+	render 'new'
+    end
+  end
+  private
+  def new_title
+    @title = "Sign Up"
   end
 
 end
