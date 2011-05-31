@@ -14,7 +14,7 @@ require 'Digest'
 
 class User < ActiveRecord::Base
     attr_accessor   :password
-    attr_accessible :name, :email, :password
+    attr_accessible :name, :email, :password, :password_confirmation
 
     [:name, :email].each do | sym |
 	validates sym, :presence => true, :length => {:maximum => 50 }
@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
 	:allow_blank => false,
 	:length => { :within => 6..40, :too_long => "password too long",
 	    :too_short => "password must be > 6 characters"}
-    #validates :password_confirmation, :presence=>true
+    #not needed, it seems cause of the attr_accessible above.
+    validates :password_confirmation, :presence => true
+
     before_save :encrypt_password
     # get a user if authorized
     def self.authorize(email, password)

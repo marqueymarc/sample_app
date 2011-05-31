@@ -11,14 +11,14 @@ describe User do
 	   :password => @password = "lemmein", 
 	   :password_confirmation => @password}
 	@bad_mails = %w[marc@marc, marc_at_marc.com, marc@marc.]
-	@user = User.create!(@attr)
     end
     
     it "should create a new instance given a valid attribute" do
 	u = User.create!(@attr.merge(:email=>"next@next.com", :name=>"another"))
     end
-    it "should create fail if password and confirmation don't match" do
-	u = User.create!(@attr.merge(:email=>"next@next.com", :name=>"another"))
+    it "should fail if password and confirmation don't match" do
+	u = User.new(@attr.merge(:password_confirmation => "xx"))
+	u.should_not be_valid
     end
     [:name, :email].each do | sym |
       it "should require a #{sym}" do
@@ -38,10 +38,15 @@ describe User do
 	end
     end
     it "should reject duplicate emails" do
+	User.create!(@attr)
 	b_m = User.new(@attr.merge(:email => @attr[:email].upcase))
 	b_m.should_not be_valid
     end
     describe "Password validations" do
+	before(:each) do
+	    @user = User.create!(@attr)
+	end
+
 	[ ["should have a password", ""] ,
 	  ["should fail with a password which is too short" , "aaaa"],
 	  ["should fail with a password which is too long", "a"*41]
