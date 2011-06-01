@@ -73,6 +73,10 @@ describe UsersController do
 		post :create, :user => @attr
 	    end.should change(User, :count).by(1)
 	end
+	it "should show show a welcome message" do
+	    post :create, :user=> @attr
+	    flash[:success].should =~ /Welcome/i
+	end
 	it "should show that user's page" do
 	    post :create, :user=> @attr
 	    response.should redirect_to(user_path(assigns(:user)))

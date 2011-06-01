@@ -67,30 +67,33 @@ name {
 
 /* error messages */
 .field_with_errors {
-    margin-top: 10px;
-    padding: 2px;
-    background-color: red;
-    display
+    margin-top: 5px;
+    padding: 2px 0px 2px 2px;
+    background-color: #c00;
     display: table;
+    width: 100%;
+}
+div .field_with_errors {
+    display: inline-block;
 }
 .field_with_errors label {
     color: #fff;
 }
 #error_explanation {
     width: 380;
-    border: 2px solid red;
+    border: 2px solid #c00;
     padding: 10px;
     padding-bottom: 12px;
     margin-bottom: 20px;
     background-color: #f0f0f0;
-    font-family:	sans-serif;
+   font-family:	sans-serif;
 }
 #error_explanation h2 {
-    text-align: left;
+    text-align: center;
     font-weight: bold;
     padding: 5px 5px 5px 15px;
     font-size: 12px;
-    margin: -7px;
+    margin: -5px 0px;
     background-color: #c00;
     color: #fff;
 }
@@ -98,6 +101,9 @@ name {
     color: #333;
     margin-bottom: 0;
     padding: 5px;
+}
+#error_explanation ul {
+    margin:	0px;
 }
 #error_explanation ul li {
     font-size: 12px;
