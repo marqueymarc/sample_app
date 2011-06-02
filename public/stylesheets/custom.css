@@ -19,25 +19,29 @@ html {
 -webkit-box-reflect: below 2px
 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.75, transparent), to(white));
 }
-.round, .signup_button_round, .new_user{
+.inner_round, .round, .signup_button_round{
     border-radius: 10px;
     -moz-border-radius: 10px;
+}
+.inner_msg {
+    font-size:	80%;
 }
 .container {
 width: 100%;
 }
-.new_user {
+.inner_round{
     width:	    400px;
-    padding:	    4px;
+    padding:	    10px 10px 5px 10px;
 }
 
-.profile , .new_user {
+.inner_round, .profile {
     position:	    relative;
-    top:	    -150px;
+    top:	    -250px;
     margin-left:    auto;
     margin-right:   auto;
     background:	    white;
 }
+
 name {
     margin-left:    4px;
     font-size:	    14pt;
@@ -51,6 +55,14 @@ name {
     margin:	    4px;
     padding:	    4px 10px;
     background:	    PaleGoldenRod;
+}
+.flash.failure {
+    font-weight:    bold;
+    color:	    #c00;
+}
+.flash.success {
+    font-weight:    bold;
+    color:	    #darkgreen;
 }
 .sidebar strong  {
     display:	    inline-block;

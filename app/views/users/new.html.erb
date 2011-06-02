@@ -1,13 +1,23 @@
 <h1>Sign Up Now, Dude</h1>
+<div class="inner_round">
 <%= form_for @user do |f| %>
     <%= render 'shared/error_messages' %>
+    <div class="field">
     <%= f.label :name %> <br/>
-    <%= f.text_field :name %> <br/>
+    <%= f.text_field :name %> 
+    </div>
+    <div class="field">
     <%= f.label :email %> <br/>
-    <%= f.text_field :email %><br/>
+    <%= f.text_field :email %>
+    </div>
+    <div>
     <%= f.label :password %> <br/>
-    <%= f.password_field :password %><br/>
+    <%= f.password_field :password %>
+    </div>
+    <div>
     <%= f.label :password_confirmation%> <br/>
-    <%= f.password_field :password_confirmation %><br/>
+    <%= f.password_field :password_confirmation %>
+    </div>
     <%= f.submit%>
 <% end %>
+</div>
