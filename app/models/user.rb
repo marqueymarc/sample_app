@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
     u
   end
   def self.authenticate_with_salt(id, salt)
-    (u = find_by_id_and_salt(id)) && u.salt == salt
+    user = find_by_id(id)
+    (user && user.salt == salt)? user: nil
   end
 
   def has_password?(given_password)
