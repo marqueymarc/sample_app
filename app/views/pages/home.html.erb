@@ -1,7 +1,11 @@
 <h1>Kara My Darling</h1>
+<% if controller.signed_in? %>
+    <% controller.redirect_to current_user %>
+<% else %>
 <p>
 This is a sample home page using the
 <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
 </p>
 <%= link_to "Sign up now!", signup_path, :class => "signup_button_round" %>
+<% end %>
 

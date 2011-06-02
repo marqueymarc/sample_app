@@ -5,6 +5,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # sign out and redirect to sign in page
+    sign_out
+    redirect_to root_path
   end
 
   def create

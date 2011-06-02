@@ -87,6 +87,10 @@ describe UsersController do
 		post :create, :user => @attr
 	    end.should_not change(User, :count) 
 	end
+	it "should sign in a new user" do
+		post :create, :user => @attr
+		controller.should be_signed_in
+	end
     end
 
   end

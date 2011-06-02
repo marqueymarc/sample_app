@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
     if @user.save 
 	flash[:success] = "Welcome!"
+	sign_in @user
 	redirect_to @user
     else
 	new_title
