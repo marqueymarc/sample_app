@@ -72,14 +72,14 @@ describe User do
 	    u = User.create!(@attr.merge(:email=> "second@email.com"))
 	    @user.encrypted_password.should_not == u.encrypted_password
 	end
-	it "should find an authorized user with a correct password" do
-	    User.authorize(@email, @password).should == @user
+	it "should find an authenticated user with a correct password" do
+	    User.authenticate(@email, @password).should == @user
 	end
 	it "should not find an user with an incorrect password" do
-	    User.authorize(@email, @password + "a").should be_nil
+	    User.authenticate(@email, @password + "a").should be_nil
 	end
 	it "should not find a non-existant user" do
-	    User.authorize(@email+"A", @password).should be_nil
+	    User.authenticate(@email+"A", @password).should be_nil
 	end
     end
 end
