@@ -32,10 +32,24 @@ describe "Users" do
     end
   end
 
-#  describe "GET /users" do
-#    it "works! (now write some real specs)" do
-#      visit users_index_path
-#      response.status.should be(200)
-#    end
-#  end
+    describe "sign in/out" do
+	describe "failure" do
+	    it "should not sign an invalid user in" do
+		user = Factory(:user)
+		user.password += "a"
+		integration_sign_in(user)
+		response.should have_selector('.flash.failure',
+			    :content => "Invalid")
+	    end
+	end
+	describe "success" do
+	    it "should sign in and out a valid user" do
+		user = Factory(:user)
+		integration_sign_in(user)
+		controller.should be_signed_in
+		click_link "Sign out"
+		controller.should_not be_signed_in
+	    end
+	end
+    end
 end
