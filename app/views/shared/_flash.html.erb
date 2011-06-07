@@ -1,0 +1,3 @@
+<% controller.flash.each do |tag, value|  %>
+        <%=content_tag(:div, value, :class=>"flash #{tag}") %>
+    <% end%>
