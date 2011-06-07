@@ -1,3 +1,11 @@
-<% controller.flash.each do |tag, value|  %>
+<% option ||= {}
+   controller.flash.each do |tag, value|
+       if option[:table] %>
+        <tr>
+          <td>
+        <% end %>
         <%=content_tag(:div, value, :class=>"flash #{tag}") %>
-    <% end%>
+        <% if option[:table] %>
+            </td></tr>
+        <% end %>
+    <% end %>

@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
     @title = "Sign in"
     h = params[:session]
     user = User.authenticate(h[:email], h[:password])
+    @last_email = h[:email]
     if (user.nil?)
       # error
       flash.now[:failure] = "Invalid email/password combination"

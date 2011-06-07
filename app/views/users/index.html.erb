@@ -1,0 +1,14 @@
+<div class="users inner_round">
+  <h3>All users</h3>
+  <ul class="users">
+    <%= render "shared/flash" %>
+
+    <% @users.each do |u| %>
+        <li>
+          <%= gravatar_for(u) %>
+          <%= link_to u.name, user_path(u) %>
+        </li>
+
+    <% end %>
+  </ul>
+</div>

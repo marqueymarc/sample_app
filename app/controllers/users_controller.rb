@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :authenticate, :only => [:index, :edit, :update]
   before_filter :correct_user, :only => [:edit, :update]
+
+def index
+
+    @title = "All users"
+    @users = User.all
+ end
+
 
   def new
     new_title
@@ -23,6 +30,8 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       new_title
+      @user.password = ""
+      @user.password_confirmation = ""
       render 'new'
     end
   end
@@ -48,9 +57,11 @@ class UsersController < ApplicationController
   end
   def authenticate
     deny_access unless signed_in?
+    signed_in?
   end
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless current_user?(@user)
-   end
+  end
+
 end

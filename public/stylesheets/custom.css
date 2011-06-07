@@ -25,6 +25,14 @@ html, body {
     -moz-border-radius: 10px;
 }
 
+.inner_round {
+
+    -moz-box-shadow:  0 0 5px 1px #888;
+    -webkit-box-shadow:  0 0 5px 1px #888;
+    box-shadow:  0 0 5px 1px #888;
+}
+
+
 .inner_msg {
     font-size: 80%;
 }
@@ -84,6 +92,14 @@ name {
     border: 1pt solid black;
     vertical-align: middle;
     margin: 4px 4px 4px 0px;
+}
+
+.users h3 {
+    text-align:     center;
+    margin-top:     4px;
+}
+.users li {
+    list-style:     none;
 }
 
 /* error messages */
