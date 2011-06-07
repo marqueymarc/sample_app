@@ -28,7 +28,6 @@ class UsersController < ApplicationController
   end
   def edit
     @title = "Edit user"
-    @user = User.find(params[:id])
   end
   def update
     @title = "Edit user"
@@ -51,7 +50,7 @@ class UsersController < ApplicationController
     deny_access unless signed_in?
   end
   def correct_user
-    redirect_to(root_path) unless current_user?(User.find(params[:id]))
-  end
-
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+   end
 end
