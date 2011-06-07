@@ -1,7 +1,8 @@
-<h1>Sign Up Now, Dude</h1>
 <div class="inner_round">
-<%= form_for @user do |f| %>
-    <%= render 'shared/error_messages' %>
+  <h2>Sign up now, dude!</h2>
+  <%= render 'shared/flash' %>
+    <%= form_for @user do |f| %>
+    <%= render 'shared/error_messages', :object => @user %>
     <div class="field">
     <%= f.label :name %> <br/>
     <%= f.text_field :name %> 

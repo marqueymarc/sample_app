@@ -1,5 +1,6 @@
 <h1>Sign in</h1>
 <div class="inner_round">
+  <%= render 'shared/flash' %>
 <%= form_for(:session, :url => sessions_path) do |f| %>
     <div class="field">
     <%= f.label :email %> <br/>
