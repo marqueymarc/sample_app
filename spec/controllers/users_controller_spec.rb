@@ -31,6 +31,14 @@ describe UsersController do
           response.should have_selector('li', :content =>u.name)
         end
       end
+      it "should not show delete links to non-admins" do
+        response.should_not have_selector('li', :content =>"delete")
+      end
+      it "should show delete links to admins" do
+        @user.toggle!(:admin)
+        get :index
+        response.should have_selector('li', :content =>"delete")
+      end
       it "should be successful" do
         response.should be_success
       end
@@ -281,14 +289,23 @@ describe UsersController do
         delete :destroy, :id =>@user
         response.should redirect_to(root_path)
       end
-      it "should allow delete if admin" do
-        @admin.toggle!(:admin)
-        lambda do
-          delete :destroy, :id=>@user
-        end.should change(User, :count).by(-1)
+      describe "deletes if admin" do
+        before (:each) do
+          @admin.toggle!(:admin)
+        end
+
+        it "should allow delete if admin" do
+          lambda do
+            delete :destroy, :id=>@user
+          end.should change(User, :count).by(-1)
+        end
+        it "should not allow delete of yourself" do
+           lambda do
+             delete :destroy, :id=>@admin
+           end.should_not change(User, :count)
+           flash[:failure].should =~ /can't/i
+        end
       end
     end
-
-
   end
 end

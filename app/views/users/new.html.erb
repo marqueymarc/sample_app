@@ -2,23 +2,6 @@
   <h2>Sign up now, dude!</h2>
   <%= render 'shared/flash' %>
     <%= form_for @user do |f| %>
-    <%= render 'shared/error_messages', :object => @user %>
-    <div class="field">
-    <%= f.label :name %> <br/>
-    <%= f.text_field :name %> 
-    </div>
-    <div class="field">
-    <%= f.label :email %> <br/>
-    <%= f.text_field :email %>
-    </div>
-    <div>
-    <%= f.label :password %> <br/>
-    <%= f.password_field :password %>
-    </div>
-    <div>
-    <%= f.label :password_confirmation%> <br/>
-    <%= f.password_field :password_confirmation %>
-    </div>
-    <%= f.submit%>
-<% end %>
+        <%= render "user_form", :f =>f %>
+    <% end %>
 </div>

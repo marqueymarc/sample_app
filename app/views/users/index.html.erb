@@ -1,9 +1,9 @@
 <div class="users inner_round">
-  <h3>All users</h3>
+  <h3>All <%=User.count%> users</h3>
+  <%= render "shared/flash" %>
   <%= will_paginate %>
 
   <ul class="users">
-        <%= render "shared/flash" %>
 
        <%= render @users %>
   </ul>
