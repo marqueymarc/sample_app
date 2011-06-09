@@ -16,10 +16,13 @@ describe UsersController do
         user2 = Factory(:user, :email => "an@an.com", :name =>"Ann Other")
         user3 = Factory(:user, :email => "An@omyn.com", :name => "Ang Onymous")
         @users = [@user, user2, user3]
-        get:index
+        30.times do
+          @users << Factory(:user, :email => Factory.next(:email))
+        end
+        get :index
       end
 
-      it "should have the right title"do
+      it "should have the right title" do
         response.should have_selector('title', :content =>"All users")
       end
       it "should show users" do
@@ -30,6 +33,14 @@ describe UsersController do
       end
       it "should be successful" do
         response.should be_success
+      end
+      it "should paginate users" do
+        response.should have_selector("div.pagination")
+        response.should have_selector("span.disabled", :content => "Previous")
+        response.should have_selector("a", :href => "/users?page=2",
+                                      :content => "2")
+        response.should have_selector("a", :href => "/users?page=2",
+                                      :content => "Next")
       end
     end
   end
@@ -250,5 +261,34 @@ describe UsersController do
         response.should redirect_to(root_path)
       end
     end
+  end
+  describe "DELETE 'destroy'" do
+    before (:each) do
+      @user = Factory(:user)
+    end
+    describe "as a non signed-in user" do
+      it "should deny access" do
+        delete :destroy, :id => @user
+        response.should redirect_to(signin_path)
+      end
+    end
+    describe "as a signed-in user" do
+      before (:each) do
+        @admin = Factory(:user, :email =>"admin@admin.com")
+        test_sign_in(@admin)
+      end
+      it "should not allow a non-admin to delete" do
+        delete :destroy, :id =>@user
+        response.should redirect_to(root_path)
+      end
+      it "should allow delete if admin" do
+        @admin.toggle!(:admin)
+        lambda do
+          delete :destroy, :id=>@user
+        end.should change(User, :count).by(-1)
+      end
+    end
+
+
   end
 end

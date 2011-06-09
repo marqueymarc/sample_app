@@ -11,6 +11,7 @@
 #
 
 require 'Digest'
+USERS_PER_PAGE = 10
 
 class User < ActiveRecord::Base
   attr_accessor :password
@@ -45,6 +46,8 @@ class User < ActiveRecord::Base
   def has_password?(given_password)
     encrypt(given_password) == self.encrypted_password
   end
+  #for will_paginate
+  self.per_page = [USERS_PER_PAGE, User.count/20].max
 
   private
   def encrypt_password

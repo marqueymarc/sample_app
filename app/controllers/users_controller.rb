@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:index, :edit, :update]
+  before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
   before_filter :correct_user, :only => [:edit, :update]
+  before_filter :admin_only, :only => [:destroy]
 
-def index
+  def index
 
     @title = "All users"
-    @users = User.all
- end
+    @users = User.paginate(:page => params[:page])
+  end
 
 
   def new
@@ -19,6 +20,14 @@ def index
     if (@user = User.find(params[:id])) then
       @title = @user.name
     end
+  end
+
+  def destroy
+    u = User.find(params[:id])
+    p "in destroy ", u.inspect
+    u.destroy
+    flash[:success] = "Deleted @del_user.name"
+    redirect_to users_path
   end
 
   def create
@@ -35,9 +44,11 @@ def index
       render 'new'
     end
   end
+
   def edit
     @title = "Edit user"
   end
+
   def update
     @title = "Edit user"
     @user = User.find(params[:id])
@@ -55,13 +66,19 @@ def index
   def new_title
     @title = "Sign Up"
   end
+
   def authenticate
     deny_access unless signed_in?
     signed_in?
   end
+
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless current_user?(@user)
+  end
+
+  def admin_only
+    redirect_to(root_path) unless current_user.admin?
   end
 
 end
