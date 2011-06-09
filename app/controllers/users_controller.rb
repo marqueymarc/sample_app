@@ -23,10 +23,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    u = User.find(params[:id])
-    p "in destroy ", u.inspect
-    u.destroy
-    flash[:success] = "Deleted @del_user.name"
+    del_user = User.find(params[:id])
+    flash[:success] = "Deleted #{del_user.name}"
+    del_user.destroy
     redirect_to users_path
   end
 
