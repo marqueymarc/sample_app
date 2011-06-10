@@ -99,4 +99,24 @@ describe User do
       User.authenticate(@email+"A", @password).should be_nil
     end
   end
+  describe "micropost associations" do
+    before (:each) do
+      @user = User.create(@attr)
+      @mp1 = Factory(:micropost, :user=>@user, :created_at => 1.day.ago)
+      @mp2 = Factory(:micropost, :user =>@user, :created_at => 1.hour.ago)
+
+    end
+    it "should respond to microposts" do
+      @user.should respond_to(:microposts)
+    end
+    it "should respond microposts in rev chron order" do
+      @user.microposts.should == [@mp2, @mp1]
+    end
+    it "should destroy microposts belonging to destroyed users" do
+      @user.destroy
+      Micropost.find_by_user_id(@user.id).should be_nil
+    end
+
+  end
 end
+

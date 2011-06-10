@@ -17,8 +17,10 @@ class UsersController < ApplicationController
 
   def show
     @title = "No Users"
+    @microposts = nil
     if (@user = User.find(params[:id])) then
       @title = @user.name
+      @microposts = @user.microposts.paginate(:page => params[:page])
     end
   end
 

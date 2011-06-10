@@ -1,17 +1,28 @@
 <table class="profile inner_round">
 
-    <%= render "shared/flash", :option => {:table=>true} %>
-    <tr>
-    <td>
-    <name>
-	<%=gravatar_for(@user)%>
-	<%= @user.name %>
-    </name>
+  <%= render "shared/flash", :option => {:table=>true} %>
+  <tr>
+    <td class="main">
+      <name>
+        <%= gravatar_for(@user) %>
+        <%= @user.name %>
+      </name>
+      <% unless @user.microposts.empty? %>
+          <table class="microposts" summary="User microposts">
+            <%= render @microposts %>
+          </table>
+          <%= will_paginate @microposts %>
+      <% end %>
+
+
     </td>
     <td class="sidebar round">
-    <strong>Name</strong> <%=@user.name%><br/>
-    <strong>Email </strong><%=mail_to @user.email%><br/>
-    <strong>URL </strong><%=link_to user_path %>
+      <strong>Name</strong> <%= @user.name %>
+      <br/>
+      <strong>Email </strong><%= mail_to @user.email %>
+      <br/>
+      <strong>URL </strong><%= link_to user_path %>
+      <strong>Microposts</strong> <%= @user.microposts.count %>
     </td>
-    </tr>
+  </tr>
 </table>

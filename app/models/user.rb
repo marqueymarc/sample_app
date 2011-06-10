@@ -16,6 +16,7 @@ USERS_PER_PAGE = 10
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
+  has_many        :microposts, :inverse_of => :user, :dependent => :destroy
 
   [:name, :email].each do |sym|
     validates sym, :presence => true, :length => {:maximum => 50}

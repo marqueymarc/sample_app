@@ -104,7 +104,33 @@ name {
 .users li {
     list-style:     none;
 }
-
+/*micropost unlooked at */
+table.microposts tr td.micropost span.timestamp {
+display: block;
+font-family:   sans-serif;
+font-size: 85%;
+color: #666;
+}
+div.user_info img {
+padding-right: 0.1em;
+}
+div.user_info a {
+text-decoration: none;
+}
+div.user_info span.user_name {
+position: absolute;
+}
+div.user_info span.microposts {
+font-size: 80%;
+}
+form.new_micropost {
+margin-bottom: 2em;
+}
+form.new_micropost textarea {
+height: 4em;
+margin-bottom: 0;
+}
+/*end micropost */
 /* error messages */
 .field_with_errors {
     margin-top: 5px;
@@ -123,7 +149,7 @@ div .field_with_errors {
 }
 
 #error_explanation {
-    width: 380;
+    width: 380px;
     border: 2px solid #c00;
     padding: 10px;
     padding-bottom: 12px;

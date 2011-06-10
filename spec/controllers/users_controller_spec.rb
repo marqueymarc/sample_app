@@ -55,6 +55,8 @@ describe UsersController do
   describe "GET 'show'" do
     before (:each) do
       @user = Factory(:user)
+      @post1 = Factory(:micropost, :content=> "one post", :created_at => 1.day.ago, :user => @user)
+      @post2 = Factory(:micropost, :content=> "two blue post", :created_at => 1.hour.ago, :user => @user)
       get :show, :id => @user
     end
     it "should be successful" do
@@ -72,6 +74,10 @@ describe UsersController do
     end
     it "should have a gravatar image in it" do
       response.should have_selector('name>img', :class=> 'gravatar')
+    end
+    it "should show the posts" do
+      response.should have_selector('span.content', :content=> @post1.content)
+      response.should have_selector('span.content', :content=> @post2.content)
     end
   end
   describe "GET 'new'" do
