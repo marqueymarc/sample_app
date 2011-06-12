@@ -26,6 +26,12 @@ module SessionsHelper
     @current_user = user
   end
 
+  def authenticate
+    deny_access unless signed_in?
+    signed_in?
+  end
+
+
   private
   def user_from_remember_token
     User.authenticate_with_salt(*remember_token)

@@ -38,7 +38,8 @@ html, body {
 }
 
 .container {
-    width: 100%;
+    width:          100%;
+    margin-left:    10px;
 }
 
 .inner_round {
@@ -61,6 +62,9 @@ name {
     padding-right: 20px;
 }
 
+textarea {
+    width: 90%;
+}
 .sidebar {
     font-family: sans-serif;
     font-size: 75%;

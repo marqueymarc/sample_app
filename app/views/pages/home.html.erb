@@ -1,16 +1,20 @@
 <h1>Kara My Darling</h1>
 <% if signed_in? %>
-    <table class="front inner_round" summary="signed in users">
-      <tr>
+    <table class="front inner_round" summary="For signed-in users">
+       <tr>
         <td class="main">
           <h1 class="micropost">What's up?</h1>
-          <%= render 'shared/micropost_form' %>               '
+          <%= render  'shared/flash' %>
+          <%= render 'shared/error_messages', :object =>@micropost%>
+          <%= render 'shared/micropost_form' %>
+
         </td>
         <td class="sidebar round">
           <%= render 'shared/user_info' %>
         </td>
       </tr>
     </table>
+
 <% else %>
     <p>
       This is a sample home page using the
