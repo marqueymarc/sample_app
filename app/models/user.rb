@@ -32,6 +32,11 @@ class User < ActiveRecord::Base
   validates :password_confirmation, :presence => true
 
   before_save :encrypt_password
+
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
   # get a user if authorized
   def self.authenticate(email, password)
     if (u = find_by_email(email)) then
@@ -49,6 +54,7 @@ class User < ActiveRecord::Base
   end
   #for will_paginate
   self.per_page = [USERS_PER_PAGE, User.count/20].max
+
 
   private
   def encrypt_password

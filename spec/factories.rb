@@ -5,7 +5,7 @@ Factory.define :user do |user|
   user.password_confirmation "againand"
 end
 Factory.sequence :email do |n|
-  "person-#{n}@example.com"
+  "persons-#{n}@ex.com"
 end
 Factory.define :micropost do |m|
   m.content "default micropost test"

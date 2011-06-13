@@ -7,7 +7,7 @@ describe User do
 
   before(:each) do
     @attr = {:name => @name = "exampleuser",
-             :email => @email = "ex@user.com",
+             :email => @email = "ex@auser.com",
              :password => @password = "lemmein",
              :password_confirmation => @password}
     @bad_mails = %w[marc@marc, marc_at_marc.com, marc@marc.]
@@ -117,6 +117,22 @@ describe User do
       Micropost.find_by_user_id(@user.id).should be_nil
     end
 
+    describe "status feeds" do
+      it "should respond to feed" do
+        @user.should respond_to(:feed)
+      end
+      it "should include posts by the user" do
+        @user.feed.should include @mp1
+        @user.feed.should include @mp2
+      end
+      it "should not include posts by a different user" do
+        mp3 = Factory(:micropost, :content => "another",
+                      :user =>Factory(:user,
+                                      :email=> Factory.next(:email)))
+        @user.feed.include?(mp3).should be_false
+      end
+
+    end
   end
 end
 

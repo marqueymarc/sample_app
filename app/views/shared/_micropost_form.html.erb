@@ -1,5 +1,5 @@
-<% form_for @micropost  do |m|   %>
-<%= render 'shared/error_messages', :object => @user %>
+<%= form_for @micropost  do |m|   %>
+<%= render 'shared/error_messages', :object => @current_user %>
     <div class="field">
     <%= m.text_area :content %>
     </div>

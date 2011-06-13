@@ -5,9 +5,9 @@ class PagesController < ApplicationController
       @user = current_user
       @title = @user.name
       @micropost = Micropost.new
+      @feed_items = current_user.feed.paginate(:page=>params[:page])
     end
   end
-
 
   def about
     @title = "About"
