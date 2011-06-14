@@ -1,14 +1,18 @@
 class MicropostsController < ApplicationController
   before_filter :authenticate
-  before_filter :belongs, :only=>[:destroy]
 
 
   def destroy
-    if (@micropost = Micropost.find(params[:id]))
+    p params.inspect
+
+    if ((@micropost = Micropost.find_by_id(params[:id])) && belongs(@micropost))
       @micropost.destroy
+      flash[:success] = "Deleted."
+    else
+      flash[:failure] = "Unable to delete"
     end
-    flash.now[:success] = "Deleted."
-    render 'pages/home'
+    @micropost = Micropost.new #for home
+    redirect_to root_path
   end
 
   def create
@@ -21,7 +25,9 @@ class MicropostsController < ApplicationController
     end
   end
   private
-    def belongs
-       redirect_to root_path unless @micropost.user_id == current_user.id
+    def belongs(m)
+       p m.inspect
+       p current_user.inspect
+       m.user_id == current_user.id
     end
 end

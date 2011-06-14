@@ -62,10 +62,13 @@ name {
     padding-right: 20px;
 }
 
-textarea {
-    width: 90%;
+
+.content {
+     font-family:   Verdana, sans-serif;
 }
+
 .sidebar {
+    min-width:  120px;
     font-family: sans-serif;
     font-size: 75%;
     float: right;
@@ -108,12 +111,24 @@ textarea {
 .users li {
     list-style:     none;
 }
+.micropost {
+    font-family:    sans-serif;
+}
+/**/
 /*micropost unlooked at */
-table.microposts tr td.micropost span.timestamp {
+td.micropost{
+    border-top: 1px #8a2be2 solid;
+}
+
+tr td.micropost span.timestamp {
 display: block;
-font-family:   sans-serif;
+font-style: italic;
 font-size: 85%;
 color: #666;
+}
+.micropost .delete {
+    float:  right;
+    margin-right:   25px;
 }
 div.user_info img {
 padding-right: 0.1em;
@@ -127,9 +142,11 @@ position: absolute;
 div.user_info span.microposts {
 font-size: 80%;
 }
+/*
 form.new_micropost {
 margin-bottom: 2em;
 }
+*/
 form.new_micropost textarea {
 height: 4em;
 margin-bottom: 0;

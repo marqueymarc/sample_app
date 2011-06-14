@@ -1,0 +1,6 @@
+<% unless @feed_items.blank? %>
+    <tr><td>
+      <%= will_paginate @feed_items %>
+      </td></tr>
+    <%= render :partial => "shared/feed_single_item", :collection =>@feed_items, :as => :micropost %>
+<% end %>
