@@ -3,8 +3,6 @@ class MicropostsController < ApplicationController
 
 
   def destroy
-    p params.inspect
-
     if ((@micropost = Micropost.find_by_id(params[:id])) && belongs(@micropost))
       @micropost.destroy
       flash[:success] = "Deleted."
