@@ -26,8 +26,6 @@ class MicropostsController < ApplicationController
   end
   private
     def belongs(m)
-       p m.inspect
-       p current_user.inspect
        m.user_id == current_user.id
     end
 end
