@@ -314,4 +314,47 @@ describe UsersController do
       end
     end
   end
+  describe 'follow/unfollow' do
+    describe 'not signed in' do
+      it "shouldn't show followers page" do
+        get :followers, :id =>1
+        response.should redirect_to signin_path
+      end
+      it "shouldn't show followed page" do
+        get :following, :id =>1
+        response.should redirect_to signin_path
+      end
+
+    end
+    describe "signed in" do
+      before (:each ) do
+        @follower = Factory(:user)
+        @followed = Factory(:user, :email => Factory.next(:email))
+        @follower.follow!(@followed)
+        test_sign_in(@follower)
+      end
+      it "should show follower page w/ followers" do
+        get :followers, :id => @followed
+
+        response.should have_selector('a', :href => user_path(@follower),
+                                          :content => @follower.name)
+        response.should have_selector('title', :content => "Follow")
+      end
+      it "should show following page w/ following"do
+        get :following, :id => @follower
+        response.should have_selector('a', :href => user_path(@followed),
+                                          :content => @followed.name)
+        response.should have_selector('title', :content => "Follow")
+
+
+      end
+      it "should not show delete links even as admin" do
+        @follower.toggle!(:admin)
+        get :following, :id => @follower
+        response.should_not have_selector('a', :href => user_path(@followed),
+            :content=> "delete")
+      end
+    end
+
+  end
 end

@@ -16,7 +16,19 @@ USERS_PER_PAGE = 10
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
-  has_many        :microposts, :inverse_of => :user, :dependent => :destroy
+  has_many        :microposts, :inverse_of => :user,
+                  :dependent => :destroy
+
+  has_many        :relationships, :foreign_key => "follower_id",
+                  :dependent =>:destroy
+  has_many        :following, :through => :relationships,
+                  :source => :followed
+
+  has_many        :reverse_relationships, :class_name => "Relationship",
+                  :foreign_key => "followed_id", :dependent => :destroy
+
+  has_many        :followers,:through => :reverse_relationships,
+                  :source => :follower
 
   [:name, :email].each do |sym|
     validates sym, :presence => true, :length => {:maximum => 50}
@@ -55,6 +67,15 @@ class User < ActiveRecord::Base
   #for will_paginate
   self.per_page = [USERS_PER_PAGE, User.count/20].max
 
+  def following?(user)
+    relationships.find_by_followed_id(user)
+  end
+  def follow!(user)
+    relationships.create!(:followed_id =>user.id)
+  end
+  def unfollow!(user)
+    following?(user).destroy
+  end
 
   private
   def encrypt_password

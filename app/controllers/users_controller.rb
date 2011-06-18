@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
+  before_filter :authenticate, :only => [:index, :edit, :update, :destroy,
+                        :following, :followers]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_only, :only => [:destroy]
 
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
       @microposts = @user.microposts.paginate(:page => params[:page])
     end
   end
+
 
   def destroy
     del_user = User.find(params[:id])
@@ -66,6 +68,27 @@ class UsersController < ApplicationController
       @title = "Edit user"
       render 'edit'
     end
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @verbs = ["Following", "Follows"]
+    @title = "#{@user.name.titlecase} Following"
+    @users = @user.following.paginate(:page => params[:page])
+    @no_del = true
+    render 'show_follow'
+
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @verbs = ["Followers", "Followed by"]
+    @title = "#{@user.name.titlecase}'s Followers"
+    @users = @user.followers.paginate(:page => params[:page])
+    @no_del = true
+    render 'show_follow'
+
+
   end
 
   private

@@ -1,18 +1,23 @@
 <table class="profile inner_round">
+ <tr> <h1><%= @verbs[0] %></h1> </tr>
 
   <%= render "shared/flash", :option => {:table=>true} %>
   <tr>
     <td class="main">
       <name>
         <%= gravatar_for(@user) %>
-        <%= @user.name %>
+        <small>
+          <%=@user.name.capitalize.split(' ')[0] %>
+          </small>
       </name>
       <%= render "follow_form" %>
-      <% unless @user.microposts.empty? %>
-          <table class="microposts" summary="User microposts">
-            <%= render @microposts %>
-          </table>
-          <%= will_paginate @microposts %>
+      <% unless @users.empty? %>
+          <h3><%= @verbs[1] %></h3>
+
+          <ul class="users">
+          <%= render @users %>
+          </ul>
+          <%= will_paginate @users %>
       <% end %>
 
 

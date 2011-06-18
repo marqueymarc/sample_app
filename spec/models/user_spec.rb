@@ -29,35 +29,37 @@ describe User do
     end
   end
 
-
-  it "should create a new instance given a valid attribute" do
-    u = User.create!(@attr.merge(:email=>"next@next.com", :name=>"another"))
-  end
-  it "should fail if password and confirmation don't match" do
-    u = User.new(@attr.merge(:password_confirmation => "xx"))
-    u.should_not be_valid
-  end
-  [:name, :email].each do |sym|
-    it "should require a #{sym}" do
-      no_name_user = User.new(@attr.merge(sym =>""))
-      no_name_user.should_not be_valid
+  describe "User creation" do
+    it "should create a new instance given a valid attribute" do
+      u = User.create!(@attr.merge(:email=>"next@next.com", :name=>"another"))
     end
-  end
-  it "should limit long names" do
-    lname = "a" * 51
-    lname_user = User.new(@attr.merge(:name => lname))
-    lname_user.should_not be_valid
-  end
-  it "should reject ill_formed email names" do
-    @bad_mails.each do |address|
-      b_m = User.new(@attr.merge(:email => address))
+    it "should fail if password and confirmation don't match" do
+      u = User.new(@attr.merge(:password_confirmation => "xx"))
+      u.should_not be_valid
+    end
+    [:name, :email].each do |sym|
+      it "should require a #{sym}" do
+        no_name_user = User.new(@attr.merge(sym =>""))
+        no_name_user.should_not be_valid
+      end
+    end
+    it "should limit long names" do
+      lname = "a" * 51
+      lname_user = User.new(@attr.merge(:name => lname))
+      lname_user.should_not be_valid
+    end
+    it "should reject ill_formed email names" do
+      @bad_mails.each do |address|
+        b_m = User.new(@attr.merge(:email => address))
+        b_m.should_not be_valid
+      end
+    end
+    it "should reject duplicate emails" do
+      User.create!(@attr)
+      b_m = User.new(@attr.merge(:email => @attr[:email].upcase))
       b_m.should_not be_valid
     end
-  end
-  it "should reject duplicate emails" do
-    User.create!(@attr)
-    b_m = User.new(@attr.merge(:email => @attr[:email].upcase))
-    b_m.should_not be_valid
+
   end
   describe "Password validations" do
     before(:each) do
@@ -132,6 +134,53 @@ describe User do
         @user.feed.include?(mp3).should be_false
       end
 
+    end
+  end
+  describe "relationship association" do
+    before (:each) do
+      @user = User.create(@attr)
+      @followed = Factory(:user)
+    end
+    it "should have a relationships method" do
+      @user.should respond_to(:relationships)
+    end
+    it "should respond to following" do
+      @user.should respond_to(:following)
+
+    end
+    it "should respond to followers" do
+      @user.should respond_to(:followers)
+    end
+    it "should have a following? method" do
+      @user.should respond_to(:following?)
+    end
+    it "should have a follow! method" do
+      @user.should respond_to (:follow!)
+    end
+    it "should follow another user" do
+      @user.follow!(@followed)
+      @user.should be_following(@followed)
+    end
+    it "should include the user in the followed array" do
+      @user.follow!(@followed)
+      @user.following.should include(@followed)
+
+    end
+    it "should unfollow a user" do
+      @user.follow!(@followed)
+      @user.unfollow!(@followed)
+      @user.should_not be_following(@followed)
+
+    end
+    it "should have a reverse_relationships method" do
+      @user.should respond_to(:reverse_relationships)
+    end
+    it "should have a followers method" do
+      @user.should respond_to(:followers)
+    end
+    it "should include followers in the array" do
+      @user.follow!(@followed)
+      @followed.followers.should include(@user)
     end
   end
 end

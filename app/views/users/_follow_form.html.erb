@@ -1,0 +1,5 @@
+<% unless !signed_in? || current_user?(@user) %>
+    <div id="follow_form">
+      <%= render  (current_user.following?(@user) ? "unfollow": "follow") %>
+    </div>
+<% end %>
