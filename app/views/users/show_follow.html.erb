@@ -30,6 +30,14 @@
       <strong>URL </strong><%= link_to user_path %>
       <strong>Microposts</strong> <%= @user.microposts.count %>
       <%= render "shared/stats" %>
+      <div class="thumbnails">
+        <% unless @users.empty?
+            @users.each do |u| %>
+          <%= link_to gravatar_for(u, :size=>24), user_path(u) %>
+                <% end %>
+        <%end%>
+      </div>
+
     </td>
   </tr>
 </table>

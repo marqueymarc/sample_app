@@ -77,6 +77,10 @@ class User < ActiveRecord::Base
     following?(user).destroy
   end
 
+  def uname
+    name + (self.admin ? " (admin)": "")
+  end
+
   private
   def encrypt_password
     if (!self.salt) # book says self.new_record? here

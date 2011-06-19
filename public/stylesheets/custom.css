@@ -76,6 +76,9 @@ name {
     padding: 4px 10px;
     background: PaleGoldenRod;
 }
+.thumbnails {
+    width: 175px;
+}
 .smaller {
     font-size:  66%;
 }

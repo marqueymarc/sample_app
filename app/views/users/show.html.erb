@@ -5,7 +5,7 @@
     <td class="main">
       <name>
         <%= gravatar_for(@user) %>
-        <%= @user.name %>
+        <%= @user.uname %>
       </name>
       <%= render "follow_form" %>
       <% unless @user.microposts.empty? %>
