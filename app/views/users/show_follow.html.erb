@@ -27,7 +27,7 @@
       <br/>
       <strong>Email </strong><%= mail_to @user.email %>
       <br/>
-      <strong>URL </strong><%= link_to user_path %>
+      <strong>URL </strong> <%= link_to user_path, user_path %>
       <strong>Microposts</strong> <%= @user.microposts.count %>
       <%= render "shared/stats" %>
       <div class="thumbnails">
