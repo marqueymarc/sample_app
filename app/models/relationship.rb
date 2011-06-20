@@ -5,5 +5,7 @@ class Relationship < ActiveRecord::Base
 
   [:followed_id, :follower_id].each do |s|
     validates s, :presence => true
+
+
   end
 end
