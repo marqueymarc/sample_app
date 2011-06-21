@@ -31,5 +31,35 @@ describe Micropost do
     @user.microposts.build({:content =>"  "}).should_not be_valid
 
   end
+  it "Microposts should have a from_users_followed_by method" do
+    Micropost.should respond_to(:from_users_followed_by)
+  end
+
+  describe "integrated feed" do
+    before (:each) do
+      @user2 = Factory(:user, :email=> Factory.next(:email))
+      @user3 = Factory(:user, :email=> Factory.next(:email))
+      @user4 = Factory(:user, :email=> Factory.next(:email))
+
+      @user.follow!(@user2)
+      @user.follow!(@user3)
+      @user2.follow!(@user4)
+      [@user, @user2, @user3, @user4].each do |u|
+        u.microposts.create!(@attr)
+      end
+      @mps = Micropost.from_users_followed_by(@user)
+
+    end
+
+    it "should include posts from  followed users" do
+      [@user, @user2, @user3].each do |u|
+        @mps.should include(u.microposts.first)
+      end
+    end
+    it "should not include posts from not followed user" do
+      @mps.should_not include(@user4.microposts.first)
+    end
+
+  end
 end
 

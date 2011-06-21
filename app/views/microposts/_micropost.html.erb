@@ -1,11 +1,22 @@
 <tr>
+  <% multi_user_feed ||= false
+     if multi_user_feed %>
+      <td>
+        <%= link_to gravatar_for(micropost.user), micropost.user %>
+      </td>
+  <% end %>
   <td class="micropost">
+    <% if multi_user_feed %>
+    <span class="user">
+        <%= link_to micropost.user.name, micropost.user %>
+    </span>
+    <% end %>
     <span class="content"><%= micropost.content %></span>
     <span class="timestamp">Posted <%= time_ago_in_words(micropost.created_at) %> ago.
       <% if micropost.user == current_user %>
         <span class="delete">
           |  <%= link_to "delete", micropost, :method =>:delete, :confirm =>"Are you sure?",
-                         :title=>"Delete post"%>
+                         :title=>"Delete post" %>
           </span>
       <% end %>
     </span>

@@ -7,10 +7,13 @@
         <%= gravatar_for(@user) %>
         <%= @user.uname %>
       </name>
-      <%= render "follow_form" %>
+      <span id="users_follow_form_id">
+        <%= render "follow_form" %>
+      </span>
+
       <% unless @user.microposts.empty? %>
           <table class="microposts" summary="User microposts">
-            <%= render @microposts %>
+            <%= render @microposts%>
           </table>
           <%= will_paginate @microposts %>
       <% end %>
@@ -24,7 +27,9 @@
       <br/>
       <strong>URL </strong><%= link_to user_path %>
       <strong>Microposts</strong> <%= @user.microposts.count %>
-      <%= render "shared/stats" %>
+      <span id="shared_stats_id">
+        <%= render "shared/stats" %>
+      </span>
     </td>
   </tr>
 </table>

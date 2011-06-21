@@ -1,1 +1,2 @@
-<%= render :partial =>"microposts/micropost", :object => micropost, :as =>:micropost %>
+<%= render :partial =>"microposts/micropost", :object => micropost, :as =>:micropost,
+     :locals => {:multi_user_feed => true }%>

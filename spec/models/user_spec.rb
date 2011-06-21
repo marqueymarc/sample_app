@@ -133,7 +133,13 @@ describe User do
                                       :email=> Factory.next(:email)))
         @user.feed.include?(mp3).should be_false
       end
-
+      it "should include posts from a followed user" do
+        mp3 = Factory(:micropost, :content => "another",
+                      :user =>Factory(:user,
+                                      :email=> Factory.next(:email)))
+        @user.follow!(mp3.user)
+        @user.feed.should include(mp3)
+      end
     end
   end
   describe "relationship association" do
