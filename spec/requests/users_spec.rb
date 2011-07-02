@@ -52,4 +52,24 @@ describe "Users" do
       end
     end
   end
+  describe "delete" do
+    before (:each) do
+	@user2 = Factory(:user, :name => "Delete Thisone", 
+	    :email => Factory.next(:email))
+	@user = Factory(:user)
+	@user.toggle!(:admin)
+	integration_sign_in(@user)
+	visit users_path
+    end
+
+    it "should go to list of users" do
+	click_link  "Delete Delete Thisone"
+	response.should render_template("users")
+    end
+    it "should delete a user" do
+	response.body.should =~ /Delete Thisone/
+	click_link  "Delete Delete Thisone"
+	response.body.should_not =~ /Delete Thisone/
+    end
+  end
 end
